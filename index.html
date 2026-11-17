@@ -197,6 +197,37 @@ footer.wrap>span{display:flex;align-items:center;min-height:20px;margin:0;paddin
 }
 @media(prefers-reduced-motion:reduce){.marquee-track{animation:none;transform:none}}
 
+
+
+/* Typography consistency pass: section descriptions and core values */
+.section-head p,
+.about-text p {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0;
+}
+.value span {
+  display: block;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  word-break: normal;
+  overflow-wrap: normal;
+  font-kerning: normal;
+  font-synthesis: none;
+}
+@media (max-width: 800px) {
+  .section-head p,
+  .about-text p { font-size: 14px; line-height: 1.65; }
+  .value span { font-size: 14px; line-height: 1.4; }
+}
+
 </style>
 </head>
 <body>
