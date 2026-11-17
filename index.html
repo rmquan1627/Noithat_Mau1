@@ -147,13 +147,67 @@ button,a,input,textarea{-webkit-tap-highlight-color:transparent}
 @media(prefers-reduced-motion:reduce){.recommendation-card{animation:none}}
 
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+
+/* Brand, ticker, values and footer alignment refinements */
+.topbar{min-height:92px}
+.brand{display:inline-block;font-size:20px;line-height:1.05;font-weight:700;letter-spacing:.29em;white-space:nowrap}
+.brand small{font-size:10px;line-height:1.35;font-weight:500;letter-spacing:.32em;margin-top:7px;color:var(--muted)}
+.marquee{padding:18px 0;overflow:hidden}
+.marquee-track{display:flex;width:max-content;animation:marquee 36s linear infinite;will-change:transform}
+.marquee-group{display:flex;flex:0 0 100vw;width:100vw;min-width:100vw;align-items:center;justify-content:space-evenly;gap:clamp(18px,3vw,52px);padding:0 clamp(16px,2.5vw,44px)}
+.marquee-group span{flex:0 0 auto;margin:0;line-height:1.2;white-space:nowrap}
+@keyframes marquee{to{transform:translateX(-33.333333%)}}
+.values{gap:30px}
+.value{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.value strong{font-size:30px;line-height:1.15;margin:0 0 7px;color:var(--ink)}
+.value span{display:block;font-size:13px;line-height:1.35;font-weight:600;letter-spacing:.13em;color:var(--ink)}
+footer.wrap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;column-gap:28px;row-gap:12px;padding:30px 0;min-height:94px;font-size:10px;letter-spacing:.1em;line-height:1.25}
+.footer-brand{display:block;font-size:15px;font-weight:700;line-height:1.2;letter-spacing:.26em;color:var(--ink);white-space:nowrap}
+footer.wrap>span{display:flex;align-items:center;min-height:20px;margin:0;padding:0;line-height:1.25;letter-spacing:.1em;white-space:nowrap;transform:none;vertical-align:middle}
+.footer-copy{justify-content:center;text-align:center}
+.footer-location{justify-content:flex-end;text-align:right}
+@media(max-width:800px){
+  .topbar{min-height:78px;height:78px}
+  .nav{top:77px}
+  .brand{font-size:18px;letter-spacing:.27em}
+  .brand small{font-size:9px;letter-spacing:.29em;margin-top:6px}
+  .marquee{padding:14px 0;font-size:15px}
+  .marquee-group{flex-basis:145vw;width:145vw;min-width:145vw;justify-content:space-around;gap:20px;padding:0 16px}
+  .values{gap:22px}
+  .value strong{font-size:28px}
+  .value span{font-size:12px;letter-spacing:.12em}
+  footer.wrap{grid-template-columns:1fr;justify-items:start;align-items:start;gap:12px;padding:26px 0;font-size:10px}
+  footer.wrap>span{min-height:18px;white-space:normal;line-height:1.35;justify-content:flex-start;text-align:left}
+  .footer-brand{font-size:15px}
+  .footer-copy,.footer-location{justify-content:flex-start}
+}
+@media(max-width:520px){
+  .topbar{height:76px;min-height:76px}
+  .nav{top:75px}
+  .brand{font-size:17px;letter-spacing:.25em}
+  .brand small{font-size:8.5px;letter-spacing:.27em;margin-top:5px}
+  .marquee{font-size:14px;padding:12px 0}
+  .marquee-group{flex-basis:165vw;width:165vw;min-width:165vw;gap:18px;padding:0 12px}
+  .marquee-group span{margin:0;font-size:14px}
+  .values{grid-template-columns:1fr;gap:14px}
+  .value{display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;gap:14px;padding:0 0 12px;border-bottom:1px solid var(--line)}
+  .value strong{font-size:27px;line-height:1.1;margin:0}
+  .value span{font-size:12px;line-height:1.3}
+}
+@media(prefers-reduced-motion:reduce){.marquee-track{animation:none;transform:none}}
+
 </style>
 </head>
 <body>
 <header class="wrap topbar"><a class="brand" href="#">ATELIER<small>INTERIOR ARCHITECTURE</small></a><nav class="nav" id="nav"><a href="#about">Về chúng tôi</a><a href="#style">Phong cách</a><a href="#philosophy">Triết lý</a><a class="nav-cta" href="#contact">Trao đổi dự án </a></nav><button class="menu" id="menu" aria-label="Mở menu" aria-expanded="false">MENU</button></header>
 <main>
 <div class="wrap hero"><div class="hero-content reveal"><div class="eyebrow">Không gian sống có chủ đích</div><h1>Quiet spaces.<br><em>Lasting stories.</em></h1><p class="hero-copy">Chúng tôi kiến tạo những không gian sống tinh giản, nơi kiến trúc, vật liệu và ánh sáng cùng kể nên câu chuyện riêng của mỗi gia chủ.</p><div class="hero-actions"><a class="button" href="#style">Khám phá phong cách</a><a class="text-link" href="#about">Tìm hiểu Atelier</a></div></div><div class="hero-visual reveal delay"><div class="hero-image"></div><div class="image-index"><span>01 / 03 — RESIDENCE</span>Form & feeling</div><div class="vertical-note">SELECTED INTERIORS — 2026</div><div class="hero-caption">The art of living well</div></div></div>
-<div class="marquee"><div class="marquee-track"><span>Timeless by design</span><span>Material honesty</span><span>Spaces with soul</span><span>Timeless by design</span><span>Material honesty</span><span>Spaces with soul</span></div></div>
+<div class="marquee" aria-label="Atelier design philosophy"><div class="marquee-track">
+  <div class="marquee-group"><span>Timeless by design</span><span>Material honesty</span><span>Spaces with soul</span></div>
+  <div class="marquee-group" aria-hidden="true"><span>Timeless by design</span><span>Material honesty</span><span>Spaces with soul</span></div>
+  <div class="marquee-group" aria-hidden="true"><span>Timeless by design</span><span>Material honesty</span><span>Spaces with soul</span></div>
+</div></div>
 <section class="wrap" id="about"><div class="section-head reveal"><div><div class="eyebrow">01 — About us</div><h2>Thiết kế tốt bắt đầu<br>từ sự thấu hiểu.</h2></div><p>Atelier là đơn vị thiết kế và thi công nội thất theo đuổi vẻ đẹp bền vững. Mỗi dự án bắt đầu bằng việc lắng nghe nhịp sống, thói quen và những điều khách hàng thực sự trân trọng.</p></div><div class="about-grid"><div class="about-photo reveal"></div><div class="about-text reveal delay"><div class="eyebrow">Our purpose</div><h3>Không chỉ tạo nên một căn phòng. Chúng tôi tạo nên cảm giác thuộc về.</h3><p>Từ ý tưởng đầu tiên đến chi tiết hoàn thiện cuối cùng, mọi quyết định đều hướng đến sự hài hòa giữa công năng, cảm xúc và dấu ấn cá nhân. Chúng tôi tin rằng sự sang trọng không nằm ở những gì phô bày, mà ở những gì được cân nhắc kỹ lưỡng.</p><div class="values"><div class="value"><strong>01</strong><span>Thấu hiểu</span></div><div class="value"><strong>02</strong><span>Tinh giản</span></div><div class="value"><strong>03</strong><span>Bền vững</span></div></div></div></div></section>
 <section class="style-section" id="style"><div class="wrap"><div class="section-head reveal"><div><div class="eyebrow">02 — Our style</div><h2>Vẻ đẹp của những<br>điều vừa đủ.</h2></div><p>Ngôn ngữ thiết kế của chúng tôi được định hình bởi tỷ lệ, ánh sáng tự nhiên và sự trung thực của vật liệu. Một bảng màu trầm tĩnh, những đường nét rõ ràng và khoảng trống có ý nghĩa.</p></div><div class="style-grid"><div class="reveal"><div class="style-main"><div class="photo-label">01 — Warm minimalism</div></div><div class="style-caption"><span>Đường nét kiến trúc & tỷ lệ cân bằng</span><span>01 / 03</span></div></div><div class="style-side"><div class="reveal delay"><div class="style-small"><div class="photo-label">02 — Natural light</div></div><div class="style-caption"><span>Ánh sáng tạo chiều sâu</span><span>02 / 03</span></div></div><div class="reveal delay2"><div class="style-small second"><div class="photo-label">03 — Material honesty</div></div><div class="style-caption"><span>Vật liệu chân thực</span><span>03 / 03</span></div></div></div></div><div class="material-explorer reveal" id="materialExplorer">
   <div class="material-intro">
@@ -176,7 +230,7 @@ button,a,input,textarea{-webkit-tap-highlight-color:transparent}
 </div></section>
 <section class="wrap philosophy" id="philosophy"><div class="reveal"><div class="eyebrow">Our philosophy</div><h2>Less, but<br>more meaningful.</h2></div><div class="reveal delay"><blockquote>“Một không gian đẹp không cần nói quá nhiều. Nó chỉ cần khiến bạn muốn <em>trở về</em>, mỗi ngày.”</blockquote><div class="quote-by">Atelier — Design principle</div><div class="cursor-line" style="margin-top:45px"></div></div></section>
 <section class="contact" id="contact"><div class="wrap"><div class="eyebrow">03 — Connect with us</div><h2>Hãy bắt đầu từ<br>một cuộc trò chuyện.</h2><p class="contact-intro">Chia sẻ về không gian bạn đang hình dung. Chúng tôi sẽ liên hệ để cùng bạn tìm ra hướng đi phù hợp.</p><div class="contact-grid"><form class="contact-form" id="contactForm"><div class="field"><label for="name">Tên của bạn</label><input id="name" name="name" placeholder="Nguyễn Minh Anh" required></div><div class="field"><label for="phone">Số điện thoại</label><input id="phone" name="phone" placeholder="+84 ..." required></div><div class="field full"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="hello@example.com"></div><div class="field full"><label for="message">Đôi điều về dự án</label><textarea id="message" name="message" placeholder="Loại không gian, diện tích, phong cách bạn yêu thích..."></textarea></div><button class="submit" type="submit">Gửi lời nhắn </button></form><div class="contact-details"><div class="detail"><small>Visit our studio</small><p>Thảo Điền, TP. Hồ Chí Minh<br>Việt Nam</p></div><div class="detail"><small>Write to us</small><p>hello@atelier.vn</p></div><div class="detail"><small>Call us</small><p>+84 28 0000 2026</p></div><div class="socials"><a href="#">INSTAGRAM </a><a href="#">PINTEREST </a><a href="#">FACEBOOK </a></div></div></div></div></section>
-</main><footer class="wrap"><div class="footer-brand">ATELIER</div><span>© 2026 Atelier Interior Architecture</span><span>Designed with intention · Ho Chi Minh City</span></footer>
+</main><footer class="wrap"><div class="footer-brand">ATELIER</div><span class="footer-copy">© 2026 Atelier Interior Architecture</span><span class="footer-location">Designed with intention · Ho Chi Minh City</span></footer>
 <script>
 if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.14});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));}else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));}
 const menu=document.getElementById('menu'),nav=document.getElementById('nav');menu.addEventListener('click',()=>{nav.classList.toggle('open');const isOpen=nav.classList.contains('open');menu.textContent=isOpen?'ĐÓNG':'MENU';menu.setAttribute('aria-expanded',String(isOpen));});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.textContent='MENU';menu.setAttribute('aria-expanded','false')}));
