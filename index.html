@@ -18,22 +18,216 @@ section{padding:130px 0}.section-head{display:grid;grid-template-columns:1fr 1fr
 footer{padding:30px 0;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:9px;letter-spacing:.12em;text-transform:uppercase}.footer-brand{font-weight:700;letter-spacing:.22em;color:var(--ink)}.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}.reveal.visible{opacity:1;transform:none}.delay{transition-delay:.15s}.delay2{transition-delay:.3s}.cursor-line{height:1px;background:var(--copper);width:0;transition:width 1.3s ease}.visible .cursor-line{width:100%}
 @media(max-width:800px){.wrap{width:min(100% - 42px,620px)}.topbar{height:72px}.nav{display:none;position:absolute;top:71px;left:-21px;right:-21px;background:var(--paper);padding:25px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line);gap:22px}.nav.open{display:flex}.menu{display:block}.hero{padding:55px 0 55px;grid-template-columns:1fr;gap:40px;min-height:0}.hero h1{font-size:58px}.hero-visual{height:430px;margin-right:12px}.hero-image{left:20px}.vertical-note{right:-15px}.section-head,.about-grid,.style-grid,.philosophy,.contact-grid{grid-template-columns:1fr;gap:35px}.section-head{margin-bottom:40px}.section-head h2{font-size:48px}.about-photo{height:430px;margin-right:15px}.about-text{padding-top:10px}.values{gap:12px}.value strong{font-size:22px}.style-main{height:430px}.style-small{height:230px}.materials{grid-template-columns:repeat(2,1fr);margin-top:45px}.philosophy{gap:20px}.contact{padding:85px 0}.contact-grid{margin-top:45px}.contact-details{border-left:0;border-top:1px solid #55594e;padding:30px 0 0}.contact-form{gap:20px}section{padding:85px 0}footer{gap:15px;flex-wrap:wrap}}
 @media(max-width:430px){.wrap{width:calc(100% - 36px)}.hero h1{font-size:50px}.hero-visual{height:360px}.hero-actions{gap:16px;flex-wrap:wrap}.values{grid-template-columns:1fr;gap:20px}.value{display:flex;align-items:baseline;gap:15px}.value strong{min-width:55px}.style-main{height:350px}.style-small{height:190px}.contact-form{grid-template-columns:1fr}.field.full,.submit{grid-column:auto}.materials{gap:1px}.material{padding:18px 14px;min-height:135px}}
+
+/* Material selector and live product recommendations */
+.material-explorer{margin-top:74px}
+.material-intro{max-width:620px;margin-bottom:28px}
+.material-intro h3{font:400 clamp(30px,4vw,42px)/1.2 var(--serif);margin:14px 0}
+.material-intro p{color:var(--muted);font-size:12px;max-width:540px}
+.materials{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;background:transparent;margin:28px 0 48px}
+.material{appearance:none;display:block;width:100%;border:1px solid #d3cfc5;text-align:left;padding:18px;background:#e8e5dc;min-width:0;cursor:pointer;transition:border-color .25s,background .25s,transform .25s,box-shadow .25s;color:var(--ink)}
+.material:hover{transform:translateY(-3px);border-color:var(--olive)}
+.material:focus-visible,.clear-selection:focus-visible{outline:2px solid var(--copper);outline-offset:3px}
+.material.active{border-color:var(--olive);background:#f3f0e9;box-shadow:inset 0 0 0 1px var(--olive)}
+.material .swatch{display:block;height:64px;margin:0 0 16px}
+.material:nth-child(1) .swatch{background:linear-gradient(135deg,#76543c,#b18b66)}
+.material:nth-child(2) .swatch{background:linear-gradient(135deg,#242722,#555950)}
+.material:nth-child(3) .swatch{background:linear-gradient(135deg,#d8d0c1,#b8ad9a)}
+.material:nth-child(4) .swatch{background:linear-gradient(135deg,#555b42,#85876b)}
+.material strong{display:block;font:21px var(--serif);font-weight:400}
+.material>span:last-child{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.recommendation-head{display:flex;justify-content:space-between;align-items:end;gap:20px;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:22px}
+.recommendation-head h4{font:400 clamp(25px,3vw,34px)/1.2 var(--serif);margin:8px 0 0}
+.recommendation-count{font-size:10px;letter-spacing:.12em;color:var(--muted);white-space:nowrap;margin-left:auto}.clear-selection{border:0;border-bottom:1px solid var(--copper);padding:5px 0;background:transparent;color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.recommendations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.recommendation-card{min-width:0;background:var(--paper);border:1px solid #d9d5cb;overflow:hidden;animation:cardIn .45s ease both}
+.recommendation-card img{display:block;width:100%;height:220px;object-fit:cover;background:#d9d3c7}
+.recommendation-card-content{padding:18px 18px 20px}
+.recommendation-card small{font-size:9px;letter-spacing:.15em;color:var(--olive);text-transform:uppercase}
+.recommendation-card h5{font:400 22px/1.25 var(--serif);margin:8px 0}
+.recommendation-card p{font-size:11px;color:var(--muted);margin:0}
+.recommendation-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.recommendation-tags span{border:1px solid var(--line);border-radius:30px;padding:4px 8px;font-size:9px;color:var(--muted)}
+.empty-recommendations{grid-column:1/-1;padding:28px;border:1px dashed #bdb8ab;color:var(--muted);font-size:12px;text-align:center}
+.recommendation-note{font-size:10px;color:var(--muted);margin:17px 0 0}
+@keyframes cardIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* Responsive refinements: prevent sideways scrolling and keep touch targets comfortable. */
+html,body{max-width:100%;overflow-x:clip}
+img{max-width:100%}
+button,a,input,textarea{-webkit-tap-highlight-color:transparent}
+@media(max-width:800px){
+  .wrap{width:calc(100% - 44px)}
+  .topbar{height:72px}
+  .brand{font-size:14px}
+  .nav{left:-22px;right:-22px;gap:20px;padding:24px 22px}
+  .menu{display:block;min-height:42px;padding:8px 0 8px 12px;font-size:10px;font-weight:600;letter-spacing:.14em;color:var(--ink);cursor:pointer}
+  .hero{padding:48px 0 54px;grid-template-columns:1fr;gap:34px}
+  .hero h1{font-size:clamp(48px,10vw,66px);line-height:1.06}
+  .hero-copy{font-size:13px}
+  .hero-visual{height:clamp(300px,74vw,440px);margin:0 8px 0 0}
+  .hero-image{inset:0 0 22px 18px}
+  .vertical-note{right:-14px;top:20px;font-size:8px}
+  .image-index{padding:15px 17px;font-size:23px}
+  .hero-caption{padding:13px 15px;font-size:9px}
+  section{padding:84px 0}
+  .section-head{grid-template-columns:1fr;gap:20px;margin-bottom:38px}
+  .section-head h2{font-size:clamp(40px,8vw,54px)}
+  .section-head p{max-width:560px}
+  .about-grid{grid-template-columns:1fr;gap:34px}
+  .about-photo{height:clamp(300px,78vw,470px);margin-right:10px}
+  .about-text{padding:8px 0 0}
+  .about-text h3{font-size:clamp(30px,6vw,38px)}
+  .values{margin-top:35px}
+  .style-grid{grid-template-columns:1fr;gap:28px}
+  .style-main{height:clamp(330px,78vw,480px)}
+  .style-side{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .style-small{height:clamp(170px,42vw,250px)}
+  .style-caption{font-size:10px;gap:10px}
+  .materials{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:22px 0 36px}
+  .material{padding:14px}
+  .material .swatch{height:54px;margin-bottom:12px}
+  .recommendations{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .recommendation-card img{height:clamp(135px,35vw,210px)}
+  .recommendation-card-content{padding:14px}
+  .recommendation-card h5{font-size:19px}
+  .philosophy{grid-template-columns:1fr;gap:20px}
+  .philosophy h2{font-size:clamp(40px,8vw,56px)}
+  .contact{padding:82px 0}
+  .contact-grid{grid-template-columns:1fr;gap:42px;margin-top:42px}
+  .contact-details{border-left:0;border-top:1px solid #55594e;padding:28px 0 0}
+  .contact-form{gap:20px}
+}
+@media(max-width:520px){
+  .wrap{width:calc(100% - 36px)}
+  .topbar{height:68px}
+  .nav{top:67px;left:-18px;right:-18px}
+  .hero{padding:38px 0 44px;gap:28px}
+  .hero h1{font-size:clamp(43px,12vw,54px);margin:19px 0}
+  .hero-actions{align-items:flex-start;flex-direction:column;gap:18px}
+  .button{padding:15px 17px;min-height:48px}
+  .hero-visual{height:320px;margin-right:8px}
+  .hero-image{left:12px;bottom:20px}
+  .vertical-note{right:-14px}
+  .image-index{font-size:20px;padding:12px 14px}
+  .hero-caption{font-size:8px;padding:11px 12px}
+  .marquee{padding:13px 0;font-size:15px}
+  .marquee span{margin:0 20px}
+  section{padding:70px 0}
+  .section-head h2{font-size:42px}
+  .about-photo{height:330px;margin-right:8px}
+  .about-photo:before{inset:12px -8px -8px 12px}
+  .about-text h3{font-size:30px}
+  .values{grid-template-columns:1fr;gap:16px}
+  .value{display:flex;align-items:baseline;gap:14px}
+  .value strong{font-size:22px;min-width:34px}
+  .style-main{height:300px}
+  .style-side{grid-template-columns:1fr;gap:20px}
+  .style-small{height:230px}
+  .materials{gap:8px}
+  .material{padding:12px}
+  .material .swatch{height:48px}
+  .material strong{font-size:19px}
+  .material>span:last-child{font-size:9px}
+  .material-intro h3{font-size:30px}
+  .recommendation-head{align-items:flex-start;flex-direction:column;gap:10px}.recommendation-count{margin-left:0}
+  .recommendations{grid-template-columns:1fr;gap:14px}
+  .recommendation-card img{height:220px}
+  .recommendation-card-content{padding:16px}
+  .contact{padding:70px 0}
+  .contact h2{font-size:48px}
+  .contact-form{grid-template-columns:1fr;gap:18px}
+  .field,.field.full{grid-column:1/-1;min-width:0}
+  .field input,.field textarea{width:100%;min-width:0;font-size:16px}
+  .submit{grid-column:1/-1;width:100%;min-height:48px}
+  .contact-details{padding-top:24px}
+  .socials{flex-wrap:wrap;gap:14px}
+  footer{align-items:flex-start;flex-direction:column;gap:9px;padding:24px 0}
+}
+@media(prefers-reduced-motion:reduce){.recommendation-card{animation:none}}
+
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
-<header class="wrap topbar"><a class="brand" href="#">ATELIER<small>INTERIOR ARCHITECTURE</small></a><nav class="nav" id="nav"><a href="#about">Về chúng tôi</a><a href="#style">Phong cách</a><a href="#philosophy">Triết lý</a><a class="nav-cta" href="#contact">Trao đổi dự án </a></nav><button class="menu" id="menu" aria-label="Mở menu">☰</button></header>
+<header class="wrap topbar"><a class="brand" href="#">ATELIER<small>INTERIOR ARCHITECTURE</small></a><nav class="nav" id="nav"><a href="#about">Về chúng tôi</a><a href="#style">Phong cách</a><a href="#philosophy">Triết lý</a><a class="nav-cta" href="#contact">Trao đổi dự án </a></nav><button class="menu" id="menu" aria-label="Mở menu" aria-expanded="false">MENU</button></header>
 <main>
 <div class="wrap hero"><div class="hero-content reveal"><div class="eyebrow">Không gian sống có chủ đích</div><h1>Quiet spaces.<br><em>Lasting stories.</em></h1><p class="hero-copy">Chúng tôi kiến tạo những không gian sống tinh giản, nơi kiến trúc, vật liệu và ánh sáng cùng kể nên câu chuyện riêng của mỗi gia chủ.</p><div class="hero-actions"><a class="button" href="#style">Khám phá phong cách</a><a class="text-link" href="#about">Tìm hiểu Atelier</a></div></div><div class="hero-visual reveal delay"><div class="hero-image"></div><div class="image-index"><span>01 / 03 — RESIDENCE</span>Form & feeling</div><div class="vertical-note">SELECTED INTERIORS — 2026</div><div class="hero-caption">The art of living well</div></div></div>
 <div class="marquee"><div class="marquee-track"><span>Timeless by design</span><span>Material honesty</span><span>Spaces with soul</span><span>Timeless by design</span><span>Material honesty</span><span>Spaces with soul</span></div></div>
 <section class="wrap" id="about"><div class="section-head reveal"><div><div class="eyebrow">01 — About us</div><h2>Thiết kế tốt bắt đầu<br>từ sự thấu hiểu.</h2></div><p>Atelier là đơn vị thiết kế và thi công nội thất theo đuổi vẻ đẹp bền vững. Mỗi dự án bắt đầu bằng việc lắng nghe nhịp sống, thói quen và những điều khách hàng thực sự trân trọng.</p></div><div class="about-grid"><div class="about-photo reveal"></div><div class="about-text reveal delay"><div class="eyebrow">Our purpose</div><h3>Không chỉ tạo nên một căn phòng. Chúng tôi tạo nên cảm giác thuộc về.</h3><p>Từ ý tưởng đầu tiên đến chi tiết hoàn thiện cuối cùng, mọi quyết định đều hướng đến sự hài hòa giữa công năng, cảm xúc và dấu ấn cá nhân. Chúng tôi tin rằng sự sang trọng không nằm ở những gì phô bày, mà ở những gì được cân nhắc kỹ lưỡng.</p><div class="values"><div class="value"><strong>01</strong><span>Thấu hiểu</span></div><div class="value"><strong>02</strong><span>Tinh giản</span></div><div class="value"><strong>03</strong><span>Bền vững</span></div></div></div></div></section>
-<section class="style-section" id="style"><div class="wrap"><div class="section-head reveal"><div><div class="eyebrow">02 — Our style</div><h2>Vẻ đẹp của những<br>điều vừa đủ.</h2></div><p>Ngôn ngữ thiết kế của chúng tôi được định hình bởi tỷ lệ, ánh sáng tự nhiên và sự trung thực của vật liệu. Một bảng màu trầm tĩnh, những đường nét rõ ràng và khoảng trống có ý nghĩa.</p></div><div class="style-grid"><div class="reveal"><div class="style-main"><div class="photo-label">01 — Warm minimalism</div></div><div class="style-caption"><span>Đường nét kiến trúc & tỷ lệ cân bằng</span><span>01 / 03</span></div></div><div class="style-side"><div class="reveal delay"><div class="style-small"><div class="photo-label">02 — Natural light</div></div><div class="style-caption"><span>Ánh sáng tạo chiều sâu</span><span>02 / 03</span></div></div><div class="reveal delay2"><div class="style-small second"><div class="photo-label">03 — Material honesty</div></div><div class="style-caption"><span>Vật liệu chân thực</span><span>03 / 03</span></div></div></div></div><div class="materials reveal"><div class="material"><div class="swatch"></div><strong>Walnut</strong><span>Gỗ óc chó · Ấm áp</span></div><div class="material"><div class="swatch"></div><strong>Graphite</strong><span>Than chì · Tĩnh tại</span></div><div class="material"><div class="swatch"></div><strong>Limestone</strong><span>Đá vôi · Tự nhiên</span></div><div class="material"><div class="swatch"></div><strong>Olive</strong><span>Xanh olive · Cân bằng</span></div></div></div></section>
+<section class="style-section" id="style"><div class="wrap"><div class="section-head reveal"><div><div class="eyebrow">02 — Our style</div><h2>Vẻ đẹp của những<br>điều vừa đủ.</h2></div><p>Ngôn ngữ thiết kế của chúng tôi được định hình bởi tỷ lệ, ánh sáng tự nhiên và sự trung thực của vật liệu. Một bảng màu trầm tĩnh, những đường nét rõ ràng và khoảng trống có ý nghĩa.</p></div><div class="style-grid"><div class="reveal"><div class="style-main"><div class="photo-label">01 — Warm minimalism</div></div><div class="style-caption"><span>Đường nét kiến trúc & tỷ lệ cân bằng</span><span>01 / 03</span></div></div><div class="style-side"><div class="reveal delay"><div class="style-small"><div class="photo-label">02 — Natural light</div></div><div class="style-caption"><span>Ánh sáng tạo chiều sâu</span><span>02 / 03</span></div></div><div class="reveal delay2"><div class="style-small second"><div class="photo-label">03 — Material honesty</div></div><div class="style-caption"><span>Vật liệu chân thực</span><span>03 / 03</span></div></div></div></div><div class="material-explorer reveal" id="materialExplorer">
+  <div class="material-intro">
+    <div class="eyebrow">Material palette</div>
+    <h3>Chọn chất liệu bạn yêu thích.</h3>
+    <p>Chạm hoặc nhấn vào từng bảng màu để xem gợi ý nội thất tương ứng. Có thể chọn một hoặc kết hợp nhiều chất liệu để tìm cảm hứng phối hợp.</p>
+  </div>
+  <div class="materials" role="group" aria-label="Chọn chất liệu và tông màu">
+    <button class="material active" type="button" data-material="walnut" aria-pressed="true"><span class="swatch"></span><strong>Walnut</strong><span>Gỗ óc chó · Ấm áp</span></button>
+    <button class="material" type="button" data-material="graphite" aria-pressed="false"><span class="swatch"></span><strong>Graphite</strong><span>Than chì · Tĩnh tại</span></button>
+    <button class="material" type="button" data-material="limestone" aria-pressed="false"><span class="swatch"></span><strong>Limestone</strong><span>Đá vôi · Tự nhiên</span></button>
+    <button class="material" type="button" data-material="olive" aria-pressed="false"><span class="swatch"></span><strong>Olive</strong><span>Xanh olive · Cân bằng</span></button>
+  </div>
+  <div class="recommendation-head">
+    <div><div class="eyebrow">Curated selection</div><h4 id="recommendationTitle">Gợi ý theo Walnut</h4></div>
+    <span class="recommendation-count" id="recommendationCount">03 gợi ý</span><button class="clear-selection" id="clearMaterials" type="button">Bỏ chọn tất cả</button>
+  </div>
+  <div class="recommendations" id="recommendations" aria-live="polite"></div>
+  <p class="recommendation-note">Gợi ý mang tính định hướng thẩm mỹ. Sản phẩm và vật liệu thực tế có thể được tùy chỉnh theo kích thước, công năng và ngân sách dự án.</p>
+</div></section>
 <section class="wrap philosophy" id="philosophy"><div class="reveal"><div class="eyebrow">Our philosophy</div><h2>Less, but<br>more meaningful.</h2></div><div class="reveal delay"><blockquote>“Một không gian đẹp không cần nói quá nhiều. Nó chỉ cần khiến bạn muốn <em>trở về</em>, mỗi ngày.”</blockquote><div class="quote-by">Atelier — Design principle</div><div class="cursor-line" style="margin-top:45px"></div></div></section>
 <section class="contact" id="contact"><div class="wrap"><div class="eyebrow">03 — Connect with us</div><h2>Hãy bắt đầu từ<br>một cuộc trò chuyện.</h2><p class="contact-intro">Chia sẻ về không gian bạn đang hình dung. Chúng tôi sẽ liên hệ để cùng bạn tìm ra hướng đi phù hợp.</p><div class="contact-grid"><form class="contact-form" id="contactForm"><div class="field"><label for="name">Tên của bạn</label><input id="name" name="name" placeholder="Nguyễn Minh Anh" required></div><div class="field"><label for="phone">Số điện thoại</label><input id="phone" name="phone" placeholder="+84 ..." required></div><div class="field full"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="hello@example.com"></div><div class="field full"><label for="message">Đôi điều về dự án</label><textarea id="message" name="message" placeholder="Loại không gian, diện tích, phong cách bạn yêu thích..."></textarea></div><button class="submit" type="submit">Gửi lời nhắn </button></form><div class="contact-details"><div class="detail"><small>Visit our studio</small><p>Thảo Điền, TP. Hồ Chí Minh<br>Việt Nam</p></div><div class="detail"><small>Write to us</small><p>hello@atelier.vn</p></div><div class="detail"><small>Call us</small><p>+84 28 0000 2026</p></div><div class="socials"><a href="#">INSTAGRAM </a><a href="#">PINTEREST </a><a href="#">FACEBOOK </a></div></div></div></div></section>
 </main><footer class="wrap"><div class="footer-brand">ATELIER</div><span>© 2026 Atelier Interior Architecture</span><span>Designed with intention · Ho Chi Minh City</span></footer>
 <script>
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.14});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-const menu=document.getElementById('menu'),nav=document.getElementById('nav');menu.addEventListener('click',()=>{nav.classList.toggle('open');menu.textContent=nav.classList.contains('open')?'×':'☰'});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.textContent='☰'}));
+if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.14});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));}else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));}
+const menu=document.getElementById('menu'),nav=document.getElementById('nav');menu.addEventListener('click',()=>{nav.classList.toggle('open');const isOpen=nav.classList.contains('open');menu.textContent=isOpen?'ĐÓNG':'MENU';menu.setAttribute('aria-expanded',String(isOpen));});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.textContent='MENU';menu.setAttribute('aria-expanded','false')}));
+
+const materialProducts = [
+  {id:'w1',materials:['walnut'],room:'PHÒNG KHÁCH',name:'Bàn trà gỗ óc chó',desc:'Vân gỗ tự nhiên và dáng thấp thanh thoát, kết hợp hài hòa với sofa màu cát.',image:'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85'},
+  {id:'w2',materials:['walnut'],room:'PHÒNG ĂN',name:'Bàn ăn gỗ tông ấm',desc:'Bề mặt gỗ trầm tạo cảm giác gần gũi cho những bữa ăn sum họp.',image:'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85'},
+  {id:'w3',materials:['walnut'],room:'GÓC THƯ GIÃN',name:'Ghế thư giãn bọc linen',desc:'Chất vải sáng màu cân bằng sắc nâu, giữ tổng thể nhẹ nhàng và ấm áp.',image:'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=900&q=85'},
+  {id:'g1',materials:['graphite'],room:'PHÒNG KHÁCH',name:'Sofa sắc than chì',desc:'Phom dáng gọn và sắc độ trầm tạo điểm tựa thị giác cho không gian hiện đại.',image:'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85'},
+  {id:'g2',materials:['graphite'],room:'ÁNH SÁNG',name:'Đèn thả kim loại mờ',desc:'Bề mặt tối giản, ánh sáng tập trung giúp tạo chiều sâu cho khu vực sinh hoạt.',image:'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85'},
+  {id:'g3',materials:['graphite'],room:'ĐIỂM NHẤN',name:'Bàn phụ hoàn thiện tối',desc:'Chi tiết kim loại và màu tối phù hợp với bảng màu đơn sắc có tương phản.',image:'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85'},
+  {id:'l1',materials:['limestone'],room:'PHÒNG ĂN',name:'Bàn ăn hiệu ứng đá vôi',desc:'Bề mặt sáng, vân đá dịu và cảm giác mộc mạc cho không gian dùng chung.',image:'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85'},
+  {id:'l2',materials:['limestone'],room:'PHÒNG KHÁCH',name:'Bàn bên tông limestone',desc:'Sắc kem đá vôi giúp căn phòng sáng thoáng mà vẫn giữ nét sang trọng.',image:'https://images.unsplash.com/photo-1600210491369-e753d80a41f3?auto=format&fit=crop&w=900&q=85'},
+  {id:'l3',materials:['limestone'],room:'HOÀN THIỆN',name:'Ốp tường đá sáng',desc:'Kết cấu bề mặt tự nhiên tạo lớp nền tinh tế cho đồ nội thất và ánh sáng.',image:'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85'},
+  {id:'o1',materials:['olive'],room:'GÓC THƯ GIÃN',name:'Ghế lounge xanh olive',desc:'Sắc xanh trầm đem thiên nhiên vào nhà, đặc biệt hợp với gỗ và vải thô.',image:'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=900&q=85'},
+  {id:'o2',materials:['olive'],room:'PHÒNG NGỦ',name:'Tủ lưu trữ olive',desc:'Mảng màu xanh dịu tạo điểm nhấn kín đáo trong bảng màu trung tính.',image:'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85'},
+  {id:'o3',materials:['olive'],room:'TRANG TRÍ',name:'Phụ kiện vải xanh rêu',desc:'Lớp vải mềm và sắc xanh tự nhiên giúp hoàn thiện cảm giác thư thái.',image:'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85'}
+];
+const materialNames = {walnut:'Walnut',graphite:'Graphite',limestone:'Limestone',olive:'Olive'};
+const selectedMaterials = new Set(['walnut']);
+const recommendations = document.getElementById('recommendations');
+const recommendationTitle = document.getElementById('recommendationTitle');
+const recommendationCount = document.getElementById('recommendationCount');
+function renderMaterialProducts(){
+  const selected = [...selectedMaterials];
+  document.querySelectorAll('.material[data-material]').forEach(button=>{
+    const active = selectedMaterials.has(button.dataset.material);
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-pressed',String(active));
+  });
+  if(!selected.length){
+    recommendationTitle.textContent='Chưa chọn bảng màu';
+    recommendationCount.textContent='0 gợi ý';
+    recommendations.innerHTML='<div class="empty-recommendations">Hãy chọn ít nhất một chất liệu phía trên để xem bộ sưu tập gợi ý.</div>';
+    return;
+  }
+  recommendationTitle.textContent='Gợi ý theo '+selected.map(key=>materialNames[key]).join(' + ');
+  const products=materialProducts.filter(product=>product.materials.some(material=>selectedMaterials.has(material)));
+  recommendationCount.textContent=String(products.length).padStart(2,'0')+' gợi ý';
+  recommendations.innerHTML=products.map(product=>{
+    const tags=product.materials.map(material=>'<span>'+materialNames[material]+'</span>').join('');
+    return '<article class="recommendation-card"><img loading="lazy" src="'+product.image+'" alt="'+product.name+'"><div class="recommendation-card-content"><small>'+product.room+'</small><h5>'+product.name+'</h5><p>'+product.desc+'</p><div class="recommendation-tags">'+tags+'</div></div></article>';
+  }).join('');
+}
+document.querySelectorAll('.material[data-material]').forEach(button=>button.addEventListener('click',()=>{
+  const key=button.dataset.material;
+  if(selectedMaterials.has(key)) selectedMaterials.delete(key); else selectedMaterials.add(key);
+  renderMaterialProducts();
+}));
+document.getElementById('clearMaterials').addEventListener('click',()=>{selectedMaterials.clear();renderMaterialProducts();});
+renderMaterialProducts();
+
 document.getElementById('contactForm').addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.target);const subject=encodeURIComponent('Yêu cầu tư vấn dự án — '+data.get('name'));const body=encodeURIComponent('Tên: '+data.get('name')+'\nĐiện thoại: '+data.get('phone')+'\nEmail: '+data.get('email')+'\nNội dung: '+data.get('message'));window.location.href='mailto:hello@atelier.vn?subject='+subject+'&body='+body;});
 </script></body></html>
